@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     // 输入方向
     Vector3 input;
     // 是否死亡
-    bool dead = false;
+    public bool dead = false;
     // 当前血量
     float hp;
 

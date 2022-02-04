@@ -29,14 +29,19 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Fire();
+        if (player.GetComponent<Player>().dead) return;
+        //Move();
+        //Fire();
     }
 
     void Move()
     {
         //
         input = player.position - transform.position;
+        if (input.magnitude <= 2)
+        {
+            return;
+        }
         input = input.normalized;
         transform.position += input * speed * Time.deltaTime;
         if (input.magnitude > 0.1f)
@@ -46,7 +51,6 @@ public class Enemy : MonoBehaviour
     }
     void Fire()
     {
-        //
         weapon.Fire(true, true);
     }
 
@@ -61,7 +65,7 @@ public class Enemy : MonoBehaviour
             {
                 dead = true;
                 // 
-                // Instantiate(prefabBoomEffect, transform.position, transform.rotation);
+                Instantiate(prefabBoomEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
         }
